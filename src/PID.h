@@ -2,7 +2,34 @@
 #define PID_H
 
 class PID {
+	
+	
+	
+	double prev_cte;
+	double int_cte;
+	
+	double bestCte;
+	
+	
 public:
+
+	enum _PID_STATES
+    {
+      INIT,
+	  UPDATE_KP,
+	  CHECK1_KP,
+	  CHECK2_KP,
+	  UPDATE_KI,
+	  CHECK1_KI,
+	  CHECK2_KI,
+	  UPDATE_KD,
+	  CHECK1_KD,
+	  CHECK2_KD,
+	  TRAINED
+    };
+	
+	PID::_PID_STATES state;
+
   /*
   * Errors
   */
@@ -30,7 +57,7 @@ public:
   /*
   * Initialize PID.
   */
-  void Init(double Kp, double Ki, double Kd);
+  void Init(double Kp, double Ki, double Kd, _PID_STATES newState);
 
   /*
   * Update the PID error variables given cross track error.
@@ -41,6 +68,11 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+  
+  //
+  double Run(double cte);
+  
+  void TrainingReset(void);
 };
 
 #endif /* PID_H */
