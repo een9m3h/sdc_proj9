@@ -2,6 +2,30 @@
 Self-Driving Car Engineer Nanodegree Program
 
 ---
+## Introduction
+
+This time, however, you'll implement a PID controller in C++ to maneuver the vehicle around the track!
+
+The simulator will provide you the cross track error (CTE) and the velocity (mph) in order to compute the appropriate steering angle.
+
+## Rubric Points
+ **PID controller**: *Describe the effect each of the P, I, D components had in your implementation.*
+
+ A proportional–integral–derivative controller (PID controller) calculates the difference between a desired set-point 
+ (demand signal) and measured process variable (feedback estimate) to calculate an error signal. In this example the error signal
+ is the CTE or deviation from the lane center. To get a reasonable system response the controller uses three components, namely:  
+ proportional, integral, derivative. Each component has favourable and complementary characteristics. The proprtional component provides a 
+ demand signal (steering angle) proportional to the CTE so steering angle increases proprtional to CTE - however with this controller alone CTE can never be zero.
+ The integral component complements the proportional component and accumulates the CTE enabling a non-zero steady state steering angle to remove residual CTE error 
+ that is there with only proportional control. The derivative component if well tuned imporoves system performance by dampening oscillations as a result of the other two components.
+ 
+
+**PID controller design**: *Describe how the final hyperparameters were chosen*
+
+If the system the PID was controlling was fully known then a model could be developed. 
+Open-loop design techniuqes could then be applied to generate =the desired system step response for a rqeuired overshoot, settling time etc.
+In the absence of a model the twiddle algorithm was used as described in the lectures. The simulation was run with a given PID parameter set, 
+the CTE was evealued and  parameteres were tuned. For each given parameter set the simulation was restarted to a known state to compare CTE.
 
 ## Dependencies
 
